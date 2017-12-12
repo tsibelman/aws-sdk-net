@@ -777,7 +777,7 @@ namespace Amazon.Util
                 }
                 else
                 {
-                    encoded.Append("%").Append(string.Format(CultureInfo.InvariantCulture, "{0:X2}", (int)symbol));
+                    encoded.Append("%").AppendFormat(CultureInfo.InvariantCulture, "{0:X2}", (int)symbol);
                 }
             }
 
