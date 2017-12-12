@@ -776,15 +776,27 @@ namespace Amazon.Util
                     encoded.Append(symbol);
                 }
                 else
-                {
-                    encoded.Append("%").AppendFormat(CultureInfo.InvariantCulture, "{0:X2}", (int)symbol);
+                {	                
+					encoded.Append("%").Append(_lookup[symbol]);
                 }
             }
 
-            return encoded.ToString();
+			return encoded.ToString();
         }
 
-        public static void Sleep(TimeSpan ts)
+	    private static readonly string[] _lookup = CreateLookup();
+
+	    private static string[] CreateLookup()
+	    {
+		    var result = new string[256];
+		    for (int i = 0; i < 256; i++)
+		    {
+			    result[i] =  i.ToString("X2");			    
+		    }
+		    return result;
+	    }
+
+		public static void Sleep(TimeSpan ts)
         {
             Sleep((int)ts.TotalMilliseconds);
         }
